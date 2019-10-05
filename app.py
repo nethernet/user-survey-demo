@@ -15,6 +15,9 @@ class UserForm(FlaskForm):
 
 @application.route("/", methods=["GET","POST"])
 def user_survey():
+    db.create_all()
+    db.session.commit()
+
     form = UserForm()
 
     if request.method == 'POST':
@@ -41,6 +44,4 @@ def page_not_found(e):
     return render_template("404.html", title = '404'), 404
 
 if __name__ == "__main__":
-    db.create_all()
-    db.session.commit()
     application.run()
